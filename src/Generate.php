@@ -60,7 +60,7 @@ class Generate
                 throw new \Exception("文件不可写");
             }
 
-            echo "start generate...\n";
+            echo "start generate error code file ...\n";
             $start = $className . '::';
             $return = shell_exec("find $this->root -name '*.php' ! -path './vendor' | xargs grep '$start'");
             $arr = explode("\n", $return);
@@ -96,9 +96,11 @@ class Generate
  * @Author:\$Id$
  */
 namespace $classNameSpaceName;
+
 class $className
 {
 EOT;
+            $template .= "\n";
             foreach ($write_list as $name => $val) {
                 $template .= "    const $name = $val;\n";
             }
