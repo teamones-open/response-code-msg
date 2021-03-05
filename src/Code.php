@@ -11,17 +11,8 @@ namespace teamones\responseCodeMsg;
 
 class Code
 {
-    // 错误码系统标识
-    protected static $systemCode = "200";
-
-    // 错误码服务标识
-    protected static $serverCode = "01";
-
     // 系统标识长度
     const SYSTEM_CODE_LEN = 3;
-
-    // 服务编码长度
-    const SERVER_CODE_LEN = 2;
 
     /**
      * 生成处理code位数
@@ -45,20 +36,12 @@ class Code
     }
 
     /**
-     * 设置错误码系统标识
+     * 获取错误码系统标识
      * @param string $systemCode
+     * @return string
      */
-    public static function setSystemCode(string $systemCode = "200")
+    public static function getSystemCode(string $systemCode = "200")
     {
-        self::$systemCode = self::generateCode($systemCode, self::SYSTEM_CODE_LEN);
-    }
-
-    /**
-     * 设置错误码服务标识
-     * @param string $serverCode
-     */
-    public static function setServerCode(string $serverCode = "01")
-    {
-        self::$serverCode = self::generateCode($serverCode, self::SERVER_CODE_LEN);
+        return self::generateCode($systemCode, self::SYSTEM_CODE_LEN);
     }
 }
