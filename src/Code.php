@@ -27,9 +27,9 @@ class Code
      * 生成处理code位数
      * @param string $code
      * @param int $len
-     * @return false|string
+     * @return string
      */
-    protected static function generateCode(string $code, int $len)
+    protected static function generateCode(string $code, int $len): string
     {
         $numberLength = (int)\strlen($code);
 
