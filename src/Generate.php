@@ -7,8 +7,6 @@ declare(strict_types=1);
 
 namespace teamones\responseCodeMsg;
 
-use http\Exception\RuntimeException;
-
 class Generate
 {
     private $errorClass = null;
@@ -27,13 +25,13 @@ class Generate
                 throw new \Exception("请选择项目跟路径");
             }
 
-            if (!isset($config["system_number"]) || !is_dir($config["system_number"])) {
+            if (!isset($config["system_number"])) {
                 throw new \Exception("请配置系统编码");
             }
 
             $this->errorClass = $config["class"];
             $this->root = $config["root_path"];
-            $this->systemNumCode = Code::getSystemCode($config["system_number"]);
+            $this->systemNumCode = Code::getSystemCode((string)$config["system_number"]);
 
             if (isset($config["start_min_number"]) && $config["start_min_number"] > 0) {
                 $this->minNum = intval($config["start_min_number"]);
@@ -79,9 +77,12 @@ class Generate
             $max = $this->minNum;
             $write_list = [];
             foreach ($reflection->getConstants() as $const_name => $val) {
+                $currentRealNumber = (int)\substr((string)$val, 4);
                 $write_list[$const_name] = $val;
                 unset($codeList[$const_name]);
-                if ($val > $max) $max = $val;
+                if ($currentRealNumber > $max){
+                    $max = $currentRealNumber;
+                };
             }
             foreach ($codeList as $name => $val) {
                 $currentNumber = ++$max;
