@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace teamones\responseCodeMsg;
 
+use http\Exception\RuntimeException;
+
 class Generate
 {
     private $errorClass = null;
@@ -109,9 +111,11 @@ EOT;
     }
 
 
+    /**
+     * @param $msg
+     */
     private function errorReport($msg)
     {
-        echo $msg . "\n";
-        exit;
+        throw new \RuntimeException($msg);
     }
 }

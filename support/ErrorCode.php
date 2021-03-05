@@ -4,9 +4,9 @@
  * @Author:$Id$
  */
 
-namespace support;
-
-class ErrorCode
-{
-
-}
+//namespace support;
+//
+//class ErrorCode
+//{
+//
+//}
