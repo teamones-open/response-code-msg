@@ -63,12 +63,18 @@ class Generate
             echo "start generate error code file ...\n";
             $start = $className . '::';
             $return = shell_exec("find $this->root -name '*.php' ! -path './vendor' | xargs grep '$start'");
+
+            if(!isset($return)){
+                // 没有找到数据直接返回
+                return;
+            }
+
             $arr = explode("\n", $return);
             $codeList = [];
             foreach ($arr as $str) {
                 $str = str_replace(array(" "), array(""), $str);
                 $match = [];
-                $result = preg_match("/$start(.*?)[,|)|;]/s", $str, $match);
+                preg_match("/$start(.*?)[,|)|;]/s", $str, $match);
                 if (isset($match[1])) {
                     $codeList[$match[1]] = 1;
                 }
